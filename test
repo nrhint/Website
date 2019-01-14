@@ -1,0 +1,24 @@
+This is the log file for making the python HTML edditor.
+____________________________________________________________
+This is the part where I list current problems and additional freatures.
+
+____________________________________________________________
+I am testing inserting paragraph tags and link tags:
+
+<a href=""><a/>
+<p>
+
+</p>
+<a href="index.html">home<a/>
+____________________________________________________________
+This is a test for html.  I am trying to make headings:
+
+____________________________________________________________
+<h1>
+
+</h1>
+
+
+
+
+
