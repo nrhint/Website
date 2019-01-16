@@ -16,7 +16,7 @@ def cd():
         print("restarting command")
         cd()
 
-def openFile(name):
+def openFile():
     f = open(filedialog.askopenfilename, 'r')
     data = f.read()
     #print(data)
@@ -106,7 +106,8 @@ class Edit:
     def __init__(self, filename):
         self.filename = filename
         self.root = Tk()
-        self.text = Text(self.root, height=30, width=60, font = ("Arial", 10))
+        self.root.attributes('-topmost')
+        self.text = Text(self.root, height=30, width=120, font = ("Arial", 10))
         self.run()
     def o(self):
         self.save()
@@ -238,7 +239,7 @@ class Edit:
         #self.root.resizable(0,0)
         self.root.mainloop()
         print("run Finished")
-def editFile(filename):
-    obj = Edit(filename)
+def editFile():
+    obj = Edit(filedialog.askopenfilename())
 
 main()
