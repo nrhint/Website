@@ -17,11 +17,7 @@ def cd():
         cd()
 
 def openFile(name):
-    #In progress
-    try:
-        f = open(name, 'r')
-    except FileNotFoundError:
-        f = open(name, 'w')
+    f = open(filedialog.askopenfilename, 'r')
     data = f.read()
     #print(data)
     return data
@@ -79,7 +75,7 @@ def main():
         elif i == '2':
             createFile()
         elif i == '3':
-            editFile(input("Filename: "))
+            editFile()
         elif i == '4':
             ls()
         elif i == '5':
@@ -107,19 +103,30 @@ from tkinter import *
 import time
 
 class Edit:
-    def __init__(self, filename, mode):
+    def __init__(self, filename):
         self.filename = filename
-        self.mode = mode
         self.root = Tk()
         self.text = Text(self.root, height=30, width=60, font = ("Arial", 10))
-        if mode == 'h' or mode == 'H'or mode == 'html' or mode == 'HTML':
-            self.runHtml()
-        elif mode == 'c' or mode == 'C' or mode == 'css' or mode == 'CSS':
-            self.runCss()
+        self.run()
+    def o(self):
+        self.save()
+        self.text.delete(1.0 , END)
+        self.filename = filedialog.askopenfilename()
+        self.file = open(self.filename , 'r')
+        if self.file != '':
+            txt = self.file.read()
+            self.text.insert(INSERT,txt)
+        else:
+            pass
+    def opn(self):
+        obj = Edit(filedialog.askopenfilename())
     def save(self):
         if self.filename:
             alltext = self.text.get(1.0, END)
             open(self.filename, 'w').write(alltext)
+    def kill(self):
+        self.save()
+        self.root.quit()
     def kill2(self):
         self.save()
         self.root.destroy()
@@ -180,37 +187,37 @@ class Edit:
         self.text.insert(INSERT, "<p></p>")
     def heading(self):
         self.text.insert(INSERT,"<h3></h3>")
-    def opn(self, filename):
-        try:
-            file = open(str(filename), 'r')
-            txt = file.read()
-            self.text.insert(INSERT,txt)
-        except FileNotFoundError:
-            print("!!!FILE NOT FOUND ERROR!!!")
-            print("MAKING A NEW FILE!")
-            open(str(filename), 'w')
-    def runHtml(self):
+    def run(self):
         start = True
         #self.root = Tk()
-        self.root.title(str(self.filename)+" Edit")
+        self.root.title(str(self.filename)+"-Edit")
         menu = Menu(self.root)
         filemenu = Menu(self.root)
         self.root.config(menu = menu)
         if start == True:
-            self.opn(self.filename)
-            start == False
+            try:
+                file = open(str(self.filename), 'r')
+                txt = file.read()
+                self.text.insert(INSERT,txt)
+            except FileNotFoundError:
+                print("!!!FILE NOT FOUND ERROR!!!")
+                print("MAKING A NEW FILE!")
+                open(str(filename), 'w')
+            start = False
         menu.add_cascade(label="File", menu=filemenu)
         #filemenu.add_separator()
         filemenu.add_command(label="Save", command=self.save)
+        filemenu.add_command(label="Open", command=self.o)
+        filemenu.add_command(label="OpenInNewWin", command=self.opn)
         filemenu.add_command(label="Exit", command=self.kill2)
         insmenu = Menu(self.root)
         menu.add_cascade(label="Insert",menu= insmenu)
         insmenu.add_command(label="Date",command=self.date)
         insmenu.add_command(label="Line",command=self.line)
         html = Menu(self.root)
-        h = Menu(self.root)
+        files = Menu(self.root)
         menu.add_cascade(label="HTML",menu=html)
-        menu.add_cascade(label="HTML", menu=html)
+        menu.add_cascade(label="files", menu=files)
         html.add_command(label="Heading",command=self.heading)
         html.add_command(label="p", command = self.p)
         html.add_command(label="Link", command = self.a)
@@ -228,9 +235,10 @@ class Edit:
         self.text.config(yscrollcommand=scroll.set)
         scroll.pack(side=RIGHT, fill=Y)
         self.text.pack()
-        self.root.resizable(0,0)
+        #self.root.resizable(0,0)
         self.root.mainloop()
+        print("run Finished")
 def editFile(filename):
-    obj = Edit(filename, input("html or css? (h, c): "))
+    obj = Edit(filename)
 
 main()
