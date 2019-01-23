@@ -2,6 +2,12 @@
 ##this will create HTML files.  First it will start my creating a template and a new file.
 ##I realized that I cant do enters when using this as they will end the edditing of the file.
 
+###Things I might do or am thinking about:
+#Moving all of the code for the menus for HTML and CSS to another file
+#Figure out how to highlight text
+#Add the CSS stuff
+#############################################
+
 import os
 
 def ls():
@@ -58,7 +64,7 @@ def main():
     while run == True:
         print("-1:setup file")
         print("0:exit")
-        print("1:veiw file")
+        print("###1:veiw file")
         print("2:create file")
         print("3:edit file")
         print("4:list files")
