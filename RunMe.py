@@ -58,11 +58,11 @@ def createFile():
 
 #Main Loop:
 def main():
+    print("This will soon beacome a complete GUI. For now this is it.")
     run = True
     while run == True:
         print("-1:setup file")
         print("0:exit")
-        print("1:veiw file")
         print("2:create file")
         print("3:edit file")
         print("4:list files")
@@ -74,8 +74,6 @@ def main():
         elif i == '0':
             run = False
             print("Thank you for using this program!")
-        elif i == '1':
-            print(openFile(input("Filename: ")))
         elif i == '2':
             createFile()
         elif i == '3':
@@ -112,10 +110,10 @@ class Edit:
         self.mode = mode
         self.root = Tk()
         self.text = Text(self.root, height=30, width=60, font = ("Arial", 10))
-        if mode == 'h' or mode == 'H'or mode == 'html' or mode == 'HTML':
-            self.runHtml()
-        elif mode == 'c' or mode == 'C' or mode == 'css' or mode == 'CSS':
-            self.runCss()
+##        if mode == 'h' or mode == 'H'or mode == 'html' or mode == 'HTML':
+##            self.runHtml()
+##        elif mode == 'c' or mode == 'C' or mode == 'css' or mode == 'CSS':
+##            self.runCss()
     def save(self):
         if self.filename:
             alltext = self.text.get(1.0, END)
